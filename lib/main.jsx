@@ -2,38 +2,35 @@
 
 import React, {Component} from 'react'
 import ReactDOM from 'react-dom'
+import VideoPlayer from './player'
 
 class VideoCutter extends Component {
   constructor() {
     super()
-    this.state = {videoBlob: ''}
+    this.state = {videoBlob: '', videoDuration: 0, start: 0}
     this.loadVideo = this.loadVideo.bind(this)
+    this.setDuration = this.setDuration.bind(this)
+  }
+
+  setDuration(duration) {
+    this.setState({videoDuration: duration})
   }
 
   loadVideo(e) {
     const currentFile = e.target.files[0]
-    var video = document.getElementById('video')
-    let blob = ''
     if (e.target.files && currentFile) {
-      blob = URL.createObjectURL(currentFile);
-      console.log(blob)
-      this.setState({videoBlob: blob})
+      this.setState({videoBlob: URL.createObjectURL(currentFile)})
     }
-    video.load()
-  }
-
-  componentDidMount(){
-    console.log('Mounted')
   }
 
   render() {
     return (
       <div>
-        <p>Hello World!</p>
         <input type="file" accept="video/mp4,video/x-m4v,video/*" name="file" onChange={this.loadVideo} />
-        <video id="video" controls preload="auto" width="640" height="264">
-          <source src={this.state.videoBlob} type="video/mp4" />
-        </video>
+        <div className="player">
+          <VideoPlayer start={this.state.start} videoBlob={this.state.videoBlob} changeDuration={this.setDuration} />
+          <input type="range" min="0" max={this.state.videoDuration} onChange={(e) => {this.setState({start: e.target.value})}}/>
+        </div>
       </div>
     )
   }
