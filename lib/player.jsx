@@ -28,7 +28,7 @@ class VideoPlayer extends Component {
       <video
         ref={(ref) => { this.video = ref }}
         onLoadedMetadata={this.initialize}
-        preload="auto" width="640" height="264">
+        preload="auto" height="264">
         <source src={`${this.props.videoBlob}#t=${this.props.start},${end}`} type="video/mp4" />
       </video>
     )

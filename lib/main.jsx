@@ -29,7 +29,10 @@ class VideoCutter extends Component {
         <input type="file" accept="video/mp4,video/x-m4v,video/*" name="file" onChange={this.loadVideo} />
         <div className="player">
           <VideoPlayer start={this.state.start} videoBlob={this.state.videoBlob} changeDuration={this.setDuration} />
-          <input type="range" min="0" max={this.state.videoDuration} onChange={(e) => {this.setState({start: e.target.value})}}/>
+          <div>
+            <img className="timeline" src="http://www.myhimalayas.com/namtso/image/large/panorama_lalungla_wide_shishapangma_small.jpg" />
+            <div></div>
+          </div>
         </div>
       </div>
     )
