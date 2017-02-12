@@ -3,6 +3,7 @@
 import React, {Component} from 'react'
 import ReactDOM from 'react-dom'
 import VideoPlayer from './player'
+import RangeSlider from './slider'
 
 class VideoCutter extends Component {
   constructor() {
@@ -24,15 +25,15 @@ class VideoCutter extends Component {
   }
 
   render() {
+    const end = this.state.start + 5
     return (
       <div>
         <input type="file" accept="video/mp4,video/x-m4v,video/*" name="file" onChange={this.loadVideo} />
         <div className="player">
           <VideoPlayer start={this.state.start} videoBlob={this.state.videoBlob} changeDuration={this.setDuration} />
-          <div>
-            <img className="timeline" src="http://www.myhimalayas.com/namtso/image/large/panorama_lalungla_wide_shishapangma_small.jpg" />
-            <div></div>
-          </div>
+          <RangeSlider defaultValue={0} min={0} max={this.state.videoDuration || 10}
+            start={this.state.start} end={end}
+          />
         </div>
       </div>
     )
