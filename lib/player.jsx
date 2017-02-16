@@ -15,6 +15,7 @@ class VideoPlayer extends Component {
 
   shouldComponentUpdate(nextProps) {
     return this.props.videoBlob !== nextProps.videoBlob || this.props.start !== nextProps.start
+    || this.props.end !== nextProps.end
   }
 
   componentDidUpdate() {
@@ -23,13 +24,12 @@ class VideoPlayer extends Component {
   }
 
   render() {
-    const end = parseInt(this.props.start) + 5
     return (
       <video
         ref={(ref) => { this.video = ref }}
         onLoadedMetadata={this.initialize}
         preload="auto" height="264">
-        <source src={`${this.props.videoBlob}#t=${this.props.start},${end}`} type="video/mp4" />
+        <source src={`${this.props.videoBlob}#t=${this.props.start},${this.props.end}`} type="video/mp4" />
       </video>
     )
   }

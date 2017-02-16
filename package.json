@@ -4,6 +4,7 @@
   "description": "Simple video cutter with ReactJS",
   "dependencies": {
     "bluebird": "^3.4.6",
+    "hover.css": "^2.0.2",
     "react": "15.4.0",
     "react-dom": "15.4.0",
     "react-draggable": "^2.2.3"
