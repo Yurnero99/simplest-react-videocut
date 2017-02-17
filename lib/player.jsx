@@ -6,16 +6,18 @@ export default
 class VideoPlayer extends Component {
   constructor() {
     super()
-    this.initialize = this.initialize.bind(this)
-  }
-
-  initialize(e) {
-    this.props.changeDuration(e.target.duration)
   }
 
   shouldComponentUpdate(nextProps) {
-    return this.props.videoBlob !== nextProps.videoBlob || this.props.start !== nextProps.start
-    || this.props.end !== nextProps.end
+    return JSON.stringify(this.props) !== JSON.stringify(nextProps)
+  }
+
+  setCurrentTime(currentTime) {
+    const minutes = Math.floor(currentTime / 60)
+    const minutesFormatted = minutes < 10 ? `0${minutes}` : minutes
+    const seconds = Math.floor(currentTime - (minutes * 60))
+    const secondsFormatted = seconds < 10 ?  `0${seconds}` : seconds
+    this.props.setTimer(`${minutesFormatted}:${secondsFormatted}`)
   }
 
   componentDidUpdate() {
@@ -27,7 +29,8 @@ class VideoPlayer extends Component {
     return (
       <video
         ref={(ref) => { this.video = ref }}
-        onLoadedMetadata={this.initialize}
+        onLoadedMetadata={(e) => this.props.changeDuration(e.target.duration)}
+        onTimeUpdate={(e) => this.setCurrentTime(e.target.currentTime)}
         preload="auto" height="264">
         <source src={`${this.props.videoBlob}#t=${this.props.start},${this.props.end}`} type="video/mp4" />
       </video>

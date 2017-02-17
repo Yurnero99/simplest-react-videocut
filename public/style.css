@@ -60,6 +60,46 @@
   right: 0;
 }
 
+.control-panel {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 15px;
+}
+
+.control-panel .container {
+  width: 50%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.control-panel .button {
+  cursor: pointer;
+  margin-left: 20px;
+  margin-right: 20px;
+  font-size: 50px;
+  color: #999999;
+}
+
+.control-panel .seek-control {
+  display: flex;
+  align-items: center;
+  font-size: 30px;
+}
+
+.control-panel .seek-amount {
+  color: #B3B3B3;
+  font-family: sans-serif;
+}
+
+.control-panel .time {
+  color: #333333;
+  font-size: 30px;
+  margin: 0px 25px;
+}
+
 .range-body .rc-slider-handle {
   margin-left: -18px;
   margin-top: -16px;
